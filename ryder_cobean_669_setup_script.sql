@@ -23,7 +23,7 @@ CASCADE;
 
 -- Table Creation -------------------------------------------
 CREATE TABLE person (
-    person_id       DECIMAL(9) PRIMARY KEY,
+    person_id       SERIAL PRIMARY KEY,
     first_name      VARCHAR(255) NOT NULL,
     last_name       VARCHAR(255) NOT NULL,
     email           VARCHAR(255) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE person (
 );
 
 CREATE TABLE address(
-    address_id      DECIMAL(16) PRIMARY KEY,
+    address_id      SERIAL PRIMARY KEY,
     street_num      VARCHAR(16) NOT NULL,
     street_name     VARCHAR(255) NOT NULL,
     city            VARCHAR(64) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE address(
 );
 
 CREATE TABLE employee (
-    employee_id         DECIMAL(9) PRIMARY KEY,
+    employee_id         INTEGER PRIMARY KEY,
     hire_date           DATE NOT NULL,
     termination_date    DATE,
     FOREIGN KEY (employee_id) REFERENCES person(person_id)
@@ -66,7 +66,7 @@ CREATE TABLE focal_theme (
 );
 
 CREATE TABLE expert (
-    expert_id       DECIMAL(9) PRIMARY KEY,
+    expert_id       INTEGER PRIMARY KEY,
     address_id      DECIMAL(16) NOT NULL,
     resume_text     TEXT,
     num_engagements DECIMAL(4),  -- to be procedurally populated
@@ -77,14 +77,14 @@ CREATE TABLE expert (
 );
 
 CREATE TABLE aba_member (
-    expert_id       DECIMAL(9) NOT NULL,
+    expert_id       INTEGER NOT NULL,
     aba_member_id   DECIMAL(9) UNIQUE NOT NULL,
     FOREIGN KEY (expert_id) REFERENCES expert(expert_id)
 );
 
 
 CREATE TABLE engagement (
-    engagement_id       DECIMAL(8) PRIMARY KEY,
+    engagement_id       SERIAL PRIMARY KEY,
     expert_id           DECIMAL(9) NOT NULL,
     start_date          DATE NOT NULL,
     end_date            DATE NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE engagement (
 );
 
 CREATE TABLE paid_engagement (
-    engagement_id       DECIMAL(8) PRIMARY KEY,
+    engagement_id       INTEGER PRIMARY KEY,
     fee_rate            DECIMAL(9,2) NOT NULL,
     fee_type            VARCHAR(8) CHECK (fee_type IN ('Daily', 'Hourly', 'Lump sum')) NOT NULL,
     work_time           DECIMAL(4),
@@ -104,7 +104,7 @@ CREATE TABLE paid_engagement (
 );
 
 CREATE TABLE vol_engagement (
-    engagement_id       DECIMAL(8) PRIMARY KEY,
+    engagement_id       INTEGER PRIMARY KEY,
     in_kind_rate        DECIMAL(6,2),
     work_days           DECIMAL(4),
     FOREIGN KEY (engagement_id) REFERENCES engagement(engagement_id)
@@ -127,20 +127,20 @@ CREATE TABLE program_categorization (
 
 CREATE TABLE expert_categorization (
     theme_code  VARCHAR(3) NOT NULL,
-    expert_id   DECIMAL(9) NOT NULL,
+    expert_id   INTEGER NOT NULL,
     FOREIGN KEY (theme_code) REFERENCES focal_theme(theme_code),
     FOREIGN KEY (expert_id) REFERENCES expert(expert_id)
 );
 
 CREATE TABLE program_engagement (
     program_id      DECIMAL(7) NOT NULL,
-    engagement_id   DECIMAL(8) NOT NULL,
+    engagement_id   INTEGER NOT NULL,
     FOREIGN KEY (program_id) REFERENCES program(program_id),
     FOREIGN KEY (engagement_id) REFERENCES engagement(engagement_id)
 );
 
 CREATE TABLE engagement_location (
-    engagement_id   DECIMAL(8) NOT NULL,
+    engagement_id   INTEGER NOT NULL,
     country_code    CHAR(2) NOT NULL,
     FOREIGN KEY (engagement_id) REFERENCES engagement(engagement_id),
     FOREIGN KEY (country_code) REFERENCES country(country_code)
