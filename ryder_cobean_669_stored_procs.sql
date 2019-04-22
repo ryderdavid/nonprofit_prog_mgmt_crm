@@ -14,31 +14,9 @@ AS
         END;
     $proc$ LANGUAGE plpgsql;
 
-/*-- Stored Procedure for Adding Data to Person-Employee Entity ---------------------------------
-CREATE OR REPLACE FUNCTION add_expert_func(
-    first_name IN VARCHAR, last_name IN VARCHAR, email IN VARCHAR, phone IN DECIMAL,
-    street_num IN VARCHAR, street_name IN VARCHAR, city IN VARCHAR, subnational_div IN VARCHAR,
-    address_country IN VARCHAR, postal_code IN VARCHAR
-) RETURNS VOID
-AS
-    $proc$
-        BEGIN
-            INSERT INTO person(person_id, first_name, last_name, email, phone, first_entered, is_employee, is_expert)
-            VALUES (DEFAULT, first_name, last_name, email, phone, current_date, FALSE, TRUE);
-
-            INSERT INTO address (address_id, street_num, street_name, city, subnational_div, address_country, postal_code)
-            VALUES (DEFAULT, street_num, street_name, city, subnational_div, address_country, postal_code);
-
-            INSERT INTO expert(expert_id, address_id)
-            VALUES (currval('person_person_id_seq'), currval('address_address_id_seq'));
-        END;
-    $proc$ LANGUAGE plpgsql;*/
 
 
-
-
-
--- Stored Procedure for Adding Data to Person-Employee Entity ---------------------------------
+-- Stored Procedure for Adding Data to Person-Employee Entity with THemes---------------------------------
 CREATE OR REPLACE FUNCTION add_expert_with_themes_func(
     first_name IN VARCHAR, last_name IN VARCHAR, email IN VARCHAR, phone IN DECIMAL,
     street_num IN VARCHAR, street_name IN VARCHAR, city IN VARCHAR, subnational_div IN VARCHAR,
@@ -70,9 +48,9 @@ AS
 
 
 
--- Stored Procedure for Adding Data to Person-Employee Entity ---------------------------------
+-- Stored Procedure for Adding Data to Program Entity with Themes ---------------------------------
 CREATE OR REPLACE FUNCTION add_program_with_themes_func(
-
+    
 ) RETURNS VOID
 AS
     $proc$
