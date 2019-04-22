@@ -447,11 +447,43 @@ VALUES
 ('ZMB', 'Zambia', 'ZAMBIA', 'ZAMBIA', 'ZAMBIA'),
 ('ZWE', 'Zimbabwe', 'ZIMBABWE', 'ZIMBABWE', 'ZIMBABWE');
 
+
+-- Insert a bunch of dummy employees --------------------------------------------------------
 START TRANSACTION;
 INSERT INTO person (person_id, first_name, last_name, email, phone, first_entered, is_employee, is_expert)
-VALUES (DEFAULT, 'Jim', 'Dewim', 'jim@dewim.net','30458293488', current_date, FALSE, TRUE);
+VALUES (DEFAULT, 'Nonnie', 'Diehard', 'nonnie@americanbar.org','12025550000', current_date, TRUE, FALSE);
 
-INSERT INTO
+INSERT INTO employee(employee_id, hire_date)
+VALUES (currval('public.person_person_id_seq'), CAST('1-FEB-2016' AS DATE));
 
+INSERT INTO person (person_id, first_name, last_name, email, phone, first_entered, is_employee, is_expert)
+VALUES (DEFAULT, 'Annie', 'Hewes', 'annie@americanbar.org','12025558888', current_date, TRUE, FALSE);
+
+INSERT INTO employee(employee_id, hire_date)
+VALUES (currval('public.person_person_id_seq'), CAST('1-FEB-2011' AS DATE));
+
+INSERT INTO person (person_id, first_name, last_name, email, phone, first_entered, is_employee, is_expert)
+VALUES (DEFAULT, 'Ashton', 'Merle', 'ashton@americanbar.org','12025558999', current_date, TRUE, FALSE);
+
+INSERT INTO employee(employee_id, hire_date)
+VALUES (currval('public.person_person_id_seq'), CAST('1-Jan-2010' AS DATE));
+
+INSERT INTO person (person_id, first_name, last_name, email, phone, first_entered, is_employee, is_expert)
+VALUES (DEFAULT, 'Tom', 'Moller', 'tom@americanbar.org','12025557778', current_date, TRUE, FALSE);
+
+INSERT INTO employee(employee_id, hire_date)
+VALUES (currval('public.person_person_id_seq'), CAST('1-Mar-2013' AS DATE));
+
+INSERT INTO person (person_id, first_name, last_name, email, phone, first_entered, is_employee, is_expert)
+VALUES (DEFAULT, 'Mandy', 'Berners', 'mandy@americanbar.org','12025556668', current_date, TRUE, FALSE);
+
+INSERT INTO employee(employee_id, hire_date)
+VALUES (currval('public.person_person_id_seq'), CAST('1-Oct-2015' AS DATE));
+
+INSERT INTO person (person_id, first_name, last_name, email, phone, first_entered, is_employee, is_expert)
+VALUES (DEFAULT, 'Kevin', 'Kowbon', 'kevin@americanbar.org','12025555588', current_date, TRUE, FALSE);
+
+INSERT INTO employee(employee_id, hire_date)
+VALUES (currval('public.person_person_id_seq'), CAST('1-FEB-2014' AS DATE));
 
 COMMIT TRANSACTION;
