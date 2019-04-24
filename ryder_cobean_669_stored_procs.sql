@@ -154,11 +154,28 @@ AS
     $proc$ LANGUAGE plpgsql;
 
 
+CREATE TABLE program_manager_change_history (
+program_id INTEGER NOT NULL,
+old_manager_id INTEGER NOT NULL,
+new_manager_id INTEGER NOT NULL,
+change_date DATE NOT NULL,
+FOREIGN KEY (program_id) REFERENCES program(program_id));
 
-
-
-
-
+CREATE OR REPLACE FUNCTION program_manager_changes_func()
+RETURNS TRIGGER LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF OLD.manager_id <> NEW.manager_id THEN
+        INSERT INTO program_manager_change_history (program_id, old_manager_id, new_manager_id, change_date)
+        VALUES(NEW.item_id, OLD.price, NEW.price, CURRENT_DATE);
+    END IF;
+    RETURN NEW;
+END;
+$$;
+CREATE TRIGGER item_history_trg
+BEFORE UPDATE ON Item
+FOR EACH ROW
+EXECUTE PROCEDURE item_history_func();
 
 
 
