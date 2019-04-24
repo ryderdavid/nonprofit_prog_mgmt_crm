@@ -120,7 +120,7 @@ AS
 -- Stored Procedure to create paid engagement -------------------------------------------------
 CREATE OR REPLACE FUNCTION add_paid_engagement_func(
     expert_id IN INTEGER, program_ids IN VARCHAR, country_codes IN VARCHAR, s_date IN DATE, e_date IN DATE,
-    rating IN DECIMAL, summary IN TEXT, fee_rate in DECIMAL, fee_type IN VARCHAR, work_time IN DECIMAL
+    rating IN DECIMAL, summary IN TEXT, daily_rate in DECIMAL, work_days IN DECIMAL
  ) RETURNS VOID
 AS
     $proc$
@@ -136,8 +136,8 @@ AS
                                     performance_rating, engagement_summary, is_paid, is_volunteer)
             VALUES (DEFAULT, expert_id, s_date, e_date, rating, summary, TRUE, FALSE);
 
-            INSERT INTO paid_engagement (engagement_id, fee_rate, fee_type, work_time)
-            VALUES (currval('engagement_engagement_id_seq'), fee_rate, fee_type, work_time);
+            INSERT INTO paid_engagement (engagement_id, daily_rate, work_days)
+            VALUES (currval('engagement_engagement_id_seq'), daily_rate, work_days);
 
             FOREACH p IN ARRAY v_programs
                 LOOP
@@ -152,7 +152,6 @@ AS
                 END LOOP;
         END;
     $proc$ LANGUAGE plpgsql;
-
 
 CREATE TABLE program_manager_change_history (
 change_id       SERIAL PRIMARY KEY,

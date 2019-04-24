@@ -17,7 +17,8 @@ DROP TABLE
     paid_engagement,
     vol_engagement,
     country,
-    address
+    address,
+    program_manager_change_history
 CASCADE;
 
 -- Table Creation -------------------------------------------
@@ -155,24 +156,25 @@ CREATE TABLE program_location (
 
 
 -- Indexes for Foreign Keys -----------------------------------------------------------------
-CREATE INDEX        engagement_expert_id_fkey               ON engagement(expert_id);
-CREATE INDEX        program_manager_id_fkey                 ON program(manager_id);
-CREATE INDEX        program_categorization_theme_code_fkey  ON program_categorization(theme_code);
-CREATE INDEX        program_categorization_program_id_fkey  ON program_categorization(program_id);
-CREATE INDEX        expert_categorization_theme_code_fkey   ON expert_categorization(theme_code);
-CREATE INDEX        expert_categorization_expert_id_fkey    ON expert_categorization(expert_id);
-CREATE UNIQUE INDEX aba_member_expert_id_fkey               ON aba_member(expert_id);
-CREATE UNIQUE INDEX paid_engagement_engagement_id_fkey      ON paid_engagement(engagement_id);
-CREATE UNIQUE INDEX vol_engagement_engagement_id_fkey       ON vol_engagement(engagement_id);
-CREATE INDEX        engagement_location_engagement_id_fkey  ON engagement_location(engagement_id);
-CREATE INDEX        engagement_location_country_code_fkey   ON engagement_location(country_code);
-CREATE INDEX        program_location_program_id_fkey        ON program_location(program_id);
-CREATE INDEX        program_location_country_code_fkey      ON program_location(country_code);
-CREATE INDEX        engagement_program_program_id_fkey      ON engagement_program(program_id);
-CREATE INDEX        engagement_engagement_program_id_fkey   ON engagement_program(engagement_id);
-CREATE INDEX        expert_address_id_fkey                  ON expert(address_id);
-CREATE UNIQUE INDEX expert_expert_id_fkey                   ON expert(expert_id);
-CREATE UNIQUE INDEX employee_employee_id_fkey               ON employee(employee_id);
+CREATE INDEX        engagement_expert_id_fkey                       ON engagement(expert_id);
+CREATE INDEX        program_manager_id_fkey                         ON program(manager_id);
+CREATE INDEX        program_categorization_theme_code_fkey          ON program_categorization(theme_code);
+CREATE INDEX        program_categorization_program_id_fkey          ON program_categorization(program_id);
+CREATE INDEX        expert_categorization_theme_code_fkey           ON expert_categorization(theme_code);
+CREATE INDEX        expert_categorization_expert_id_fkey            ON expert_categorization(expert_id);
+CREATE UNIQUE INDEX aba_member_expert_id_fkey                       ON aba_member(expert_id);
+CREATE UNIQUE INDEX paid_engagement_engagement_id_fkey              ON paid_engagement(engagement_id);
+CREATE UNIQUE INDEX vol_engagement_engagement_id_fkey               ON vol_engagement(engagement_id);
+CREATE INDEX        engagement_location_engagement_id_fkey          ON engagement_location(engagement_id);
+CREATE INDEX        engagement_location_country_code_fkey           ON engagement_location(country_code);
+CREATE INDEX        program_location_program_id_fkey                ON program_location(program_id);
+CREATE INDEX        program_location_country_code_fkey              ON program_location(country_code);
+CREATE INDEX        engagement_program_program_id_fkey              ON engagement_program(program_id);
+CREATE INDEX        engagement_engagement_program_id_fkey           ON engagement_program(engagement_id);
+CREATE INDEX        expert_address_id_fkey                          ON expert(address_id);
+CREATE UNIQUE INDEX expert_expert_id_fkey                           ON expert(expert_id);
+CREATE UNIQUE INDEX employee_employee_id_fkey                       ON employee(employee_id);
+CREATE INDEX        program_manager_change_history_program_id_fkey  ON program_manager_change_history(program_id);
 
 -- Indexes for Common Queries ---------------------------------------------------------------
 CREATE INDEX        focal_theme_theme_active_idx            ON focal_theme(theme_active);
