@@ -61,11 +61,17 @@ ORDER BY (start_date)
 SELECT expert_id,
        count(pe.engagement_id) AS num_engagements,
        round(avg(performance_rating), 2) AS average_rating,
-       avg(fee_rate) AS average_fee,
+       CASE WHEN fee_type = 'Daily' THEN fee_rate
+           WHEN fee_type = 'Hourly' THEN fee_rate * 8
+           ELSE fee_rate / DateDiff(day, engagement.end_date, engagement.start_date)
+           END AS fee_rate,
+
+      /* avg(fee_rate) AS average_fee,*/
        sum(fee_rate * work_time)
 
 FROM engagement
 JOIN paid_engagement pe ON engagement.engagement_id = pe.engagement_id
 WHERE is_paid = TRUE
-GROUP BY (expert_id, fee_rate)
+GROUP BY (expert_id)
+
 
