@@ -1,4 +1,3 @@
-
 -- Populate the Focus Themes with Current Themes -------------------------------------------
 INSERT INTO focal_theme (theme_code, theme_name, theme_active)
 VALUES      ('A2J', 'Access to Justice', TRUE),
@@ -312,11 +311,7 @@ START TRANSACTION;
 COMMIT TRANSACTION;
 
 
-
-
-
-
--- Execute Stored Procedure for Adding Expert to Person - Expert and Address
+-- Execute Stored Procedure for Adding Expert to Person - Expert and Address -------------------
 START TRANSACTION;
 DO
     $$BEGIN
@@ -402,7 +397,7 @@ COMMIT TRANSACTION;
 
 
 
--- Add Programs --------------------------------------------------------------------
+-- Add Programs -------------------------------------------------------------------------------------------------------
 START TRANSACTION;
 DO
     $$BEGIN
@@ -476,3 +471,19 @@ DO
 COMMIT TRANSACTION;
 
 
+-- Update some program manager assignments to trigger history table --------------------------------
+
+UPDATE program
+SET
+    manager_id = 3
+WHERE program_id = 6781505;
+
+UPDATE program
+SET
+    manager_id = 2
+WHERE program_id = 6981672;
+
+UPDATE program
+SET
+    manager_id = 1
+WHERE program_id = 6981672;
