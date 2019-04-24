@@ -1,4 +1,4 @@
--- Stored Procedure for Adding Data to Person-Employee Entity ---------------------------------
+-- Stored Procedure for Adding Employee Entity ------------------------------------------------
 
 CREATE OR REPLACE FUNCTION add_employee_func(
     first_name IN VARCHAR, last_name IN VARCHAR, email IN VARCHAR, phone IN DECIMAL, hire_date IN DATE
@@ -16,7 +16,7 @@ AS
 
 
 
--- Stored Procedure for Adding Data to Person-Employee Entity with THemes---------------------------------
+-- Stored Procedure for Adding Expert ----------------------------------------------------------
 CREATE OR REPLACE FUNCTION add_expert_with_themes_func(
     first_name IN VARCHAR, last_name IN VARCHAR, email IN VARCHAR, phone IN DECIMAL,
     street_num IN VARCHAR, street_name IN VARCHAR, city IN VARCHAR, subnational_div IN VARCHAR,
@@ -49,7 +49,7 @@ AS
 
 
 -- Stored Procedure for Adding Data to Program Entity with Themes ---------------------------------
-CREATE OR REPLACE FUNCTION add_program_country_func(
+CREATE OR REPLACE FUNCTION add_program_func(
     program_id IN DECIMAL, program_name IN VARCHAR, start_date IN DATE, end_date IN DATE, manager_id IN INTEGER,
     themes IN VARCHAR, countries IN VARCHAR
 ) RETURNS VOID
@@ -72,7 +72,7 @@ AS
                     VALUES (program_id, t);
                 END LOOP;
 
-            FOREACH t IN ARRAY v_countries
+            FOREACH c IN ARRAY v_countries
                 LOOP
                     INSERT INTO program_location(program_id, country_code)
                     VALUES (program_id, c);
@@ -80,70 +80,79 @@ AS
         END;
     $proc$ LANGUAGE plpgsql;
 
+-- STORED Procedure to Add a Volunteer Engagement -----------------------------------------------
+CREATE OR REPLACE FUNCTION add_vol_engagement_func(
+    expert_id IN INTEGER, program_ids IN VARCHAR, country_codes IN VARCHAR, s_date IN DATE, e_date IN DATE,
+    rating IN DECIMAL, summary IN TEXT, in_kind_rate IN DECIMAL, work_days IN DECIMAL
+ ) RETURNS VOID
+AS
+    $proc$
+        DECLARE
+            v_programs VARCHAR[] := string_to_array(program_ids, ',');
+            p VARCHAR;
+
+            v_countries VARCHAR[] := string_to_array(country_codes, ',');
+            c VARCHAR;
+
+        BEGIN
+            INSERT INTO engagement (engagement_id, expert_id, start_date, end_date,
+                                    performance_rating, engagement_summary, is_paid, is_volunteer)
+            VALUES (DEFAULT, expert_id, s_date, e_date, rating, summary, FALSE, TRUE);
+
+            INSERT INTO vol_engagement(engagement_id, in_kind_rate, work_days)
+            VALUES (currval('engagement_engagement_id_seq'), in_kind_rate, work_days);
+
+            FOREACH p IN ARRAY v_programs
+                LOOP
+                    INSERT INTO engagement_program (engagement_id, program_id)
+                    VALUES (currval('engagement_engagement_id_seq'), CAST(p AS DECIMAL));
+                END LOOP;
+
+            FOREACH c IN ARRAY v_countries
+                LOOP
+                   INSERT INTO engagement_location (engagement_id, country_code)
+                   VALUES (currval('engagement_engagement_id_seq'), c);
+                END LOOP;
+        END;
+    $proc$ LANGUAGE plpgsql;
 
 
+-- Stored Procedure to create paid engagement -------------------------------------------------
+CREATE OR REPLACE FUNCTION add_paid_engagement_func(
+    expert_id IN INTEGER, program_ids IN VARCHAR, country_codes IN VARCHAR, s_date IN DATE, e_date IN DATE,
+    rating IN DECIMAL, summary IN TEXT, fee_rate in DECIMAL, fee_type IN VARCHAR, work_time IN DECIMAL
+ ) RETURNS VOID
+AS
+    $proc$
+        DECLARE
+            v_programs VARCHAR[] := string_to_array(program_ids, ',');
+            p VARCHAR;
 
+            v_countries VARCHAR[] := string_to_array(country_codes, ',');
+            c VARCHAR;
 
+        BEGIN
+            INSERT INTO engagement (engagement_id, expert_id, start_date, end_date,
+                                    performance_rating, engagement_summary, is_paid, is_volunteer)
+            VALUES (DEFAULT, expert_id, s_date, e_date, rating, summary, TRUE, FALSE);
 
+            INSERT INTO paid_engagement (engagement_id, fee_rate, fee_type, work_time)
+            VALUES (currval('engagement_engagement_id_seq'), fee_rate, fee_type, work_time);
 
+            FOREACH p IN ARRAY v_programs
+                LOOP
+                    INSERT INTO engagement_program (engagement_id, program_id)
+                    VALUES (currval('engagement_engagement_id_seq'), CAST(p AS DECIMAL));
+                END LOOP;
 
+            FOREACH c IN ARRAY v_countries
+                LOOP
+                   INSERT INTO engagement_location (engagement_id, country_code)
+                   VALUES (currval('engagement_engagement_id_seq'), c);
+                END LOOP;
+        END;
+    $proc$ LANGUAGE plpgsql;
 
-
-
-
-
-
-
-
-
-
-
-
--- Execute Stored Procedure for Adding to Person - Employee Entity
-START TRANSACTION;
-DO
-    $$BEGIN
-            EXECUTE public.add_employee_func(
-                'Ryder', 'Cobean', 'ryder@americanbar.org', 15554451111, CAST('1-Jul-2014' AS DATE)
-            );
-    END$$;
-COMMIT TRANSACTION;
-
--- Execute Stored Procedure for Adding Expert to Person - Expert and Address
-START TRANSACTION;
-DO
-    $$BEGIN
-            EXECUTE public.add_expert_with_themes_func(
-                'Berg', 'Dunberg', 'berg@Dunberglaw.org', 15551166666611, '97087', 'Balthergreen Street', 'Sprogfold', 'California', 'USA', '90219', 'A2J,COM,HR,HE'
-            );
-    END$$;
-COMMIT TRANSACTION;
-
--- Execute Stored Procedure for adding Country that has existing Manager
-START TRANSACTION;
-DO
-    $$BEGIN
-            EXECUTE public.add_program_country_func(
-                6681569, 'Stronger Institutional Guarantees for Human Rights Protection in Armenia',
-                CAST('18-SEP-2017' AS DATE), CAST('01-Nov-2019' AS DATE), 17, 'A2J,HR,GEN', 'ARM,GEO'
-            );
-    END$$;
-COMMIT TRANSACTION;
-
-
-
-
-
-
-
-
-
-
-
-
-DELETE FROM person;
-
-ROLLBACK TRANSACTION;
 
 
 
