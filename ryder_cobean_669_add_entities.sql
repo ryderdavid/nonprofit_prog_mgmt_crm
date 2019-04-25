@@ -491,8 +491,6 @@ WHERE program_id = 6981672;
 
 
 -- Add engagements ---------------------------------------------------------------------------------
-
-
 START TRANSACTION;
 DO
     $$BEGIN
@@ -553,6 +551,7 @@ DO
             3,
             'Quality training but extremely difficult to work with.',
             1000,
+            'Daily',
             7
         );
     END$$;
@@ -566,6 +565,7 @@ DO
             6,
             'Good job but very expensive.',
             1200,
+            'Daily',
             7
         );
     END$$;
@@ -579,6 +579,7 @@ DO
             7,
             'Good job - legal ed training',
             400,
+            'Daily',
             7
         );
     END$$;
@@ -592,6 +593,7 @@ DO
             8,
             'Legal Ed',
             400,
+            'Daily',
             11
         );
     END$$;
@@ -605,6 +607,7 @@ DO
             8,
             'Legal Ed',
             400,
+            'Daily',
             11
         );
     END$$;
@@ -618,6 +621,7 @@ DO
             6,
             'Legal Ed',
             400,
+            'Daily',
             35
         );
     END$$;
@@ -631,6 +635,7 @@ DO
             7,
             'Trial advocacy trainings for defense attorneys',
             450,
+            'Daily',
             10
         );
     END$$;

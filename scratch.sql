@@ -106,3 +106,40 @@ ON
 
 
 ROLLBACK TRANSACTION;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM program_manager_change_history;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

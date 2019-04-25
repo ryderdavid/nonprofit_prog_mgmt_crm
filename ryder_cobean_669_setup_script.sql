@@ -95,11 +95,11 @@ CREATE TABLE engagement (
 
 CREATE TABLE paid_engagement (
     engagement_id       INTEGER PRIMARY KEY,
---     fee_rate            DECIMAL(9,2) NOT NULL,
---     fee_type            VARCHAR(8) CHECK (fee_type IN ('Daily', 'Hourly', 'Lump sum')) NOT NULL,
---     work_time           DECIMAL(4),
-    daily_rate          DECIMAL(9,2) NOT NULL,
-    work_days           DECIMAL(4) NOT NULL,
+    fee_rate            DECIMAL(9,2) NOT NULL, -- to be implemented past the scope of this submission
+    fee_type            VARCHAR(8) CHECK (fee_type IN ('Daily', 'Hourly', 'Lump sum')) NOT NULL, -- to be implemented past the scope of this submission
+    work_time           DECIMAL(4), -- to be submitted past the scope of this submission
+--     daily_rate          DECIMAL(9,2) NOT NULL,
+--     work_days           DECIMAL(4) NOT NULL,
     FOREIGN KEY (engagement_id) REFERENCES engagement(engagement_id)
 );
 
@@ -153,6 +153,15 @@ CREATE TABLE program_location (
     FOREIGN KEY (country_code) REFERENCES country(country_code)
 );
 
+
+-- Create table supported by trigger for history -------------------------------------
+CREATE TABLE program_manager_change_history (
+change_id       SERIAL PRIMARY KEY,
+program_id      INTEGER NOT NULL,
+old_manager_id  INTEGER NOT NULL,
+new_manager_id  INTEGER NOT NULL,
+change_date     DATE NOT NULL,
+FOREIGN KEY (program_id) REFERENCES program(program_id));
 
 
 -- Indexes for Foreign Keys -----------------------------------------------------------------

@@ -6,7 +6,7 @@
   requirements in the spec:
   Group 1: Joins of two or more tables, order by statement
   Group 2: Aggregate functions, left join, subqueries*/
-SELECT person_id, expert_name, focal_themes, num_engagements, avg_rating, phone, address
+SELECT person_id, expert_name, focal_themes, num_engagements, avg_rating, email, phone, address
 FROM
     (SELECT
         person_id,
@@ -80,7 +80,7 @@ ON
   For the project spec this satisfies:
   Group 1: Joins of more than one table, and order by statements
   Group 2: aggregate functions, subqueries, having clause, joins of 4+ tables.*/
-SELECT engagement_id, expert_name, engagement_type, performance_rating,
+SELECT engagement_id, expert_name, performance_rating,
        engagement_summary, engagement_locations, for_more_info
 FROM
     (SELECT engagement.engagement_id,
