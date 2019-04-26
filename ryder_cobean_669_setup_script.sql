@@ -95,11 +95,9 @@ CREATE TABLE engagement (
 
 CREATE TABLE paid_engagement (
     engagement_id       INTEGER PRIMARY KEY,
-    fee_rate            DECIMAL(9,2) NOT NULL, -- to be implemented past the scope of this submission
-    fee_type            VARCHAR(8) CHECK (fee_type IN ('Daily', 'Hourly', 'Lump sum')) NOT NULL, -- to be implemented past the scope of this submission
-    work_time           DECIMAL(4), -- to be submitted past the scope of this submission
---     daily_rate          DECIMAL(9,2) NOT NULL,
---     work_days           DECIMAL(4) NOT NULL,
+    fee_rate            DECIMAL(9,2) NOT NULL,
+    fee_type            VARCHAR(8) CHECK (fee_type IN ('Daily', 'Hourly', 'Lump sum')) NOT NULL,
+    work_time           DECIMAL(4),
     FOREIGN KEY (engagement_id) REFERENCES engagement(engagement_id)
 );
 
