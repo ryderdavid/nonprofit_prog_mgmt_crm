@@ -22,3 +22,6 @@ This is both an exercise in conceptually mapping business use cases in data mana
 8. Donor contacts
 9. Funding Opportunity tracking
 10. Proposal tracking
+
+## Physical entity relation diagram
+![Physical ERD](https://github.com/ryderdavid/cs_669_crm_rdbms/blob/master/ERD/physical_ERD_posgres.png "Physical ERD")
