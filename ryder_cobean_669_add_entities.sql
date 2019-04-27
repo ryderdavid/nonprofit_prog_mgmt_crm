@@ -422,11 +422,11 @@ START TRANSACTION;
 DO
     $$BEGIN
             EXECUTE add_program_func(
-                6981672, 'Strategic Training and Education Program - Russia',
+                6981600, 'Strategic Training Program',
                 CAST('1-Jan-2019' AS DATE), CAST('31-Dec-2020' AS DATE),
                 7,
                 'AC,HR,LED',
-                'RUS'
+                'HUN'
             );
     END$$;
 COMMIT TRANSACTION;
@@ -461,7 +461,7 @@ START TRANSACTION;
 DO
     $$BEGIN
             EXECUTE add_program_func(
-                6991693, 'Supporting Communal Access to Justice and Systematic Reform to Protect Mining Communities'' Rights in South Kivu, DRC',
+                6991500, 'Supporting Access to Justice in Ethiopia',
                 CAST('1-Sep-2017' AS DATE), CAST('30-Jun-2019' AS DATE),
                 5,
                 'A2J,HE,HR',
@@ -471,31 +471,12 @@ DO
 COMMIT TRANSACTION;
 
 
--- Update some program manager assignments to trigger history table --------------------------------
-
-UPDATE program
-SET
-    manager_id = 3
-WHERE program_id = 6781505;
-
-UPDATE program
-SET
-    manager_id = 2
-WHERE program_id = 6981672;
-
-UPDATE program
-SET
-    manager_id = 1
-WHERE program_id = 6981672;
-
-
-
 -- Add engagements ---------------------------------------------------------------------------------
 START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_vol_engagement_func(
-            10, '6981672', 'RUS',  CAST('15-jan-2019' AS DATE), CAST('20-jan-2019' AS DATE),
+            10, '6981600', 'RUS',  CAST('15-jan-2019' AS DATE), CAST('20-jan-2019' AS DATE),
             7,
             'Anticorruption training - great lecture, slow to send expense report',
             700,
@@ -508,7 +489,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_vol_engagement_func(
-            10, '6981672', 'RUS',  CAST('11-oct-2018' AS DATE), CAST('31-oct-2018' AS DATE),
+            10, '6981600', 'RUS',  CAST('11-oct-2018' AS DATE), CAST('31-oct-2018' AS DATE),
             9,
             'Anticorruption training - investigative reporting. Great work',
             700,
@@ -641,3 +622,20 @@ DO
     END$$;
 COMMIT TRANSACTION;
 
+
+-- Update some program manager assignments to trigger history table --------------------------------
+
+UPDATE program
+SET
+    manager_id = 3
+WHERE program_id = 6781505;
+
+UPDATE program
+SET
+    manager_id = 2
+WHERE program_id = 6981600;
+
+UPDATE program
+SET
+    manager_id = 1
+WHERE program_id = 6981600;
