@@ -2,10 +2,7 @@
   The query below pulls relevant records from expert, gets their names from person supertype,
   gets their focal themes from expert_categorization, then left joins this query on the counts
   of all engagements performed experts grouped by those experts and their average ratings.
-  Useful query to see history of existing experts and their performance. Satisfies the following
-  requirements in the spec:
-  Group 1: Joins of two or more tables, order by statement
-  Group 2: Aggregate functions, left join, subqueries*/
+  Useful query to see history of existing experts and their performance.*/
 SELECT person_id, expert_name, focal_themes, num_engagements, avg_rating, email, phone, address
 FROM
     (SELECT
@@ -38,10 +35,7 @@ ORDER BY avg_rating DESC NULLS LAST;
   (themes, countries, current manager) and left joins this table with records from our history table, such that
   this query presents a 'dashboard-level' master register of our grants, what they focus on, where they are implemented,
   and who manages them and who used to manage them. This query output actually very closely mimics a production spreadsheet
-  our organization uses, except also tracks budgets of grants (that is an extension of my own I will build into the design later)
-  This query meets the following requirements from the spec:
-  Group 1: Order by statement
-  Group 2: Joins of at least four tables, subqueries, left joins.*/
+  our organization uses, except also tracks budgets of grants (that is an extension of my own I will build into the design later)*/
 SELECT
 progs.program_id, program_name, start_date, end_date, program_themes, program_countries, current_manager, past_managers
 FROM
@@ -77,9 +71,7 @@ ON
   This pulls relevant info from the engagements, including its id, the expert involved, whether it was paid or volunteer,
   the rating, the longer explanation of the issue, the location of the engagement, and contact info of the current program
   manager responsible for the project they performed.
-  For the project spec this satisfies:
-  Group 1: Joins of more than one table, and order by statements
-  Group 2: aggregate functions, subqueries, having clause, joins of 4+ tables.*/
+*/
 SELECT engagement_id, expert_name, performance_rating,
        engagement_summary, engagement_locations, for_more_info
 FROM
