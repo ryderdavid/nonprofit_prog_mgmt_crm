@@ -2,7 +2,7 @@
 
 ## Project Direction Overview
 
-This project is a mock PostgreSQK CRM customized for use to manage numerous aspects of grant program management for a typical nonprofit organization sending experts (paid or volunteer) to serve overseas projects. It is modeled after a legal and justice sector nonprofit. 
+This project is a mock PostgreSQL CRM customized for use to manage numerous aspects of grant program management for a typical nonprofit organization sending experts (paid or volunteer) to serve overseas projects. It is modeled after a legal and justice sector nonprofit. 
 
 The database will assist employees with key knowledge management functions, such as tracking engagement history with experts, keeping logged their skills and CVs. Another function currently being built out will be providing analytics on current and past awards, their managers, donors, and key contacts. A future function will include tracking new business development, including logging opportunities, proposals, win/loss rates, competitors, and winners, and if won by us, the projects they turned into.
 
