@@ -25,3 +25,10 @@ This is both an exercise in conceptually mapping business use cases in data mana
 
 ## Physical entity relationship diagram
 ![Physical ERD](https://github.com/ryderdavid/cs_669_crm_rdbms/blob/master/ERD/physical_ERD_posgres.png "Physical ERD")
+
+## To deploy the database:
+1. Run all commands in the `setup_script.sql` file (uncomment the first line if you want to create a new database).
+2. Run all commands in the `stored_procs.sql` file.
+3. Run all commands in the `add_records.sql` file, if you wish to populate the database with some default and sample records.
+
+Queries are in `queries.sql`.
