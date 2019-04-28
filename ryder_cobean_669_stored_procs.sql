@@ -50,8 +50,8 @@ AS -- required syntax
 
 -- Stored Procedure for Adding Data to Program Entity with Themes ---------------------------------
 CREATE OR REPLACE FUNCTION add_program_func(
-    program_id IN DECIMAL, program_name IN VARCHAR, start_date IN DATE, end_date IN DATE, manager_id IN INTEGER,
-    themes IN VARCHAR, countries IN VARCHAR  -- create parameterized procedure with arguments to pass
+    program_id IN DECIMAL, program_name IN VARCHAR, start_date IN DATE, end_date IN DATE, budget IN DECIMAL,
+    manager_id IN INTEGER, themes IN VARCHAR, countries IN VARCHAR  -- create parameterized procedure with arguments to pass
 ) RETURNS VOID  -- part of plpgsql syntax
 AS  -- plpgsql syntax
     $proc$  -- start procedure block
@@ -63,8 +63,8 @@ AS  -- plpgsql syntax
             c VARCHAR;  -- counting variable token
 
         BEGIN  -- begin procedure block
-            INSERT INTO program(program_id, program_name, start_date, end_date, manager_id)  -- insert into program's attributes
-            VALUES (program_id, program_name, CAST(start_date AS DATE), CAST(end_date AS DATE), manager_id);  -- the following params from procedure call
+            INSERT INTO program(program_id, program_name, start_date, end_date, budget, manager_id)  -- insert into program's attributes
+            VALUES (program_id, program_name, CAST(start_date AS DATE), CAST(end_date AS DATE), budget, manager_id);  -- the following params from procedure call
 
             FOREACH t IN ARRAY v_themes  -- iterate over the theme code array
                 LOOP

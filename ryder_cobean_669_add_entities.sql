@@ -402,8 +402,11 @@ START TRANSACTION;
 DO
     $$BEGIN
             EXECUTE add_program_func(
-                6681569, 'Stronger Institutional Guarantees for Human Rights Protection in Armenia and Georgia',
-                CAST('18-SEP-2017' AS DATE), CAST('01-Nov-2019' AS DATE), 2, 'A2J,HR,GEN', 'ARM,GEO'
+                6681001, 'Human Rights Protection in Armenia and Georgia',
+                CAST('18-SEP-2017' AS DATE), CAST('01-Nov-2019' AS DATE),
+                1200000,
+                2,
+                'A2J,HR,GEN', 'ARM,GEO'
             );
     END$$;
 COMMIT TRANSACTION;
@@ -412,8 +415,14 @@ START TRANSACTION;
 DO
     $$BEGIN
             EXECUTE add_program_func(
-                6781505, 'Criminal Justice',
-                CAST('26-Sep-2016' AS DATE), CAST('25-sep-2020' AS DATE), 7, 'CJ,LP', 'MDA'
+                6781000,
+                'Criminal Justice',
+                CAST('26-Sep-2016' AS DATE),
+                CAST('25-sep-2020' AS DATE),
+                1500000,
+                7,
+                'CJ,LP',
+                'MDA'
             );
     END$$;
 COMMIT TRANSACTION;
@@ -424,6 +433,7 @@ DO
             EXECUTE add_program_func(
                 6981600, 'Strategic Training Program',
                 CAST('1-Jan-2019' AS DATE), CAST('31-Dec-2020' AS DATE),
+                750000,
                 7,
                 'AC,HR,LED',
                 'HUN'
@@ -437,6 +447,7 @@ DO
             EXECUTE add_program_func(
                 6681400, 'Balkans Justice Sustainability',
                 CAST('1-Jan-2016' AS DATE), CAST('30-Apr-2019' AS DATE),
+                1500000,
                 3,
                 'A2J,AC,CJ,JSS,LED,LP,GEN',
                 'MKD,SRB,BIH,ALB,XKX'
@@ -448,8 +459,9 @@ START TRANSACTION;
 DO
     $$BEGIN
             EXECUTE add_program_func(
-                6981659, 'Expanding Access to Justice',
+                6981088, 'Expanding Access to Justice',
                 CAST('1-Sep-2018' AS DATE), CAST('30-Aug-2023' AS DATE),
+                1000000,
                 4,
                 'A2J,JSS,GEN',
                 'SOM'
@@ -463,6 +475,7 @@ DO
             EXECUTE add_program_func(
                 6991500, 'Supporting Access to Justice in Ethiopia',
                 CAST('1-Sep-2017' AS DATE), CAST('30-Jun-2019' AS DATE),
+                2000000,
                 5,
                 'A2J,HE,HR',
                 'COD'
@@ -515,7 +528,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_vol_engagement_func(
-            14, '6981659', 'SOM',  CAST('11-oct-2018' AS DATE), CAST('31-oct-2018' AS DATE),
+            14, '6981088', 'SOM',  CAST('11-oct-2018' AS DATE), CAST('31-oct-2018' AS DATE),
             7,
             'Justice sector training in Somalia. Pretty good job!',
             700,
@@ -528,7 +541,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_paid_engagement_func(
-            13, '6781505', 'MDA',  CAST('15-mar-2019' AS DATE), CAST('30-mar-2019' AS DATE),
+            13, '6781000', 'MDA',  CAST('15-mar-2019' AS DATE), CAST('30-mar-2019' AS DATE),
             3,
             'Quality training but extremely difficult to work with.',
             1000,
@@ -542,7 +555,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_paid_engagement_func(
-            14, '6991693', 'COD',  CAST('10-jun-2018' AS DATE), CAST('20-jul-2019' AS DATE),
+            14, '6991500', 'COD',  CAST('10-jun-2018' AS DATE), CAST('20-jul-2019' AS DATE),
             6,
             'Good job but very expensive.',
             1200,
@@ -556,7 +569,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_paid_engagement_func(
-            15, '6781505', 'MDA',  CAST('11-oct-2017' AS DATE), CAST('18-oct-2017' AS DATE),
+            15, '6781000', 'MDA',  CAST('11-oct-2017' AS DATE), CAST('18-oct-2017' AS DATE),
             7,
             'Good job - legal ed training',
             400,
@@ -570,7 +583,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_paid_engagement_func(
-            15, '6781505', 'MDA',  CAST('18-oct-2017' AS DATE), CAST('30-oct-2017' AS DATE),
+            15, '6781000', 'MDA',  CAST('18-oct-2017' AS DATE), CAST('30-oct-2017' AS DATE),
             8,
             'Legal Ed',
             400,
@@ -584,7 +597,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_paid_engagement_func(
-            15, '6781505', 'MDA',  CAST('1-jan-2019' AS DATE), CAST('15-jan-2019' AS DATE),
+            15, '6781000', 'MDA',  CAST('1-jan-2019' AS DATE), CAST('15-jan-2019' AS DATE),
             8,
             'Legal Ed',
             400,
@@ -612,7 +625,7 @@ START TRANSACTION;
 DO
     $$BEGIN
         EXECUTE add_paid_engagement_func(
-            9, '6781505', 'MDA',  CAST('1-DEC-2018' AS DATE), CAST('15-Dec-2018' AS DATE),
+            9, '6781000', 'MDA',  CAST('1-DEC-2018' AS DATE), CAST('15-Dec-2018' AS DATE),
             7,
             'Trial advocacy trainings for defense attorneys',
             450,
@@ -628,7 +641,7 @@ COMMIT TRANSACTION;
 UPDATE program
 SET
     manager_id = 3
-WHERE program_id = 6781505;
+WHERE program_id = 6781000;
 
 UPDATE program
 SET
@@ -639,3 +652,6 @@ UPDATE program
 SET
     manager_id = 1
 WHERE program_id = 6981600;
+
+
+ROLLBACK TRANSACTION ;

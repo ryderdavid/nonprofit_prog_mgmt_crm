@@ -55,6 +55,7 @@ CREATE TABLE program (
     program_name    VARCHAR(255) NOT NULL,
     start_date      DATE NOT NULL,
     end_date        DATE NOT NULL,
+    budget          DECIMAL(16,6) NOT NULL,
     manager_id      INTEGER,
     FOREIGN KEY (manager_id) REFERENCES employee(employee_id)
 );
