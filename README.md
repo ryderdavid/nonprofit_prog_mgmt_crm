@@ -32,3 +32,8 @@ This is both an exercise in conceptually mapping business use cases in data mana
 3. Run all commands in the `add_records.sql` file, if you wish to populate the database with some default and sample records.
 
 Queries are in `queries.sql`.
+
+## Future implementation goals
+1. Validation and error checking triggers for every attribute in the system
+2. A live version of the database hosted on a cloud platform
+3. Develop simple user-friendly data entry interfaces, likely with Google Forms and Zapier calling stored procedures as a first implementation.
