@@ -121,7 +121,7 @@ AS
 CREATE OR REPLACE FUNCTION add_paid_engagement_func(
     expert_id IN INTEGER, program_ids IN VARCHAR, country_codes IN VARCHAR, s_date IN DATE, e_date IN DATE,
     rating IN DECIMAL, summary IN TEXT,
-    fee_rate IN DECIMAL, fee_type IN DECIMAL, work_time IN DECIMAL  -- create parameterized function with passed arguments
+    fee_rate IN DECIMAL, fee_type IN VARCHAR, work_time IN DECIMAL  -- create parameterized function with passed arguments
  ) RETURNS VOID  -- plpgsql syntax
 AS
     $proc$  -- begin procedure block

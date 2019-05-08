@@ -551,6 +551,7 @@ DO
     END$$;
 COMMIT TRANSACTION;
 
+
 START TRANSACTION;
 DO
     $$BEGIN
@@ -564,6 +565,7 @@ DO
         );
     END$$;
 COMMIT TRANSACTION;
+
 
 START TRANSACTION;
 DO
@@ -653,5 +655,3 @@ SET
     manager_id = 1
 WHERE program_id = 6981600;
 
-
-ROLLBACK TRANSACTION ;
